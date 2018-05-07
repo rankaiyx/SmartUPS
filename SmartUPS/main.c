@@ -4,20 +4,19 @@
 
 int execmd(char* cmd,char* result) 
 {
-    char buffer[128];                         //定义缓冲区                        
-    FILE* pipe = _popen(cmd, "r");            //打开管道，并执行命令 
-    if (!pipe)
+	char buffer[128];                         //定义缓冲区                        
+	FILE* pipe = _popen(cmd, "r");            //打开管道，并执行命令 
+	if (!pipe)
 		return 0;                             //返回0表示运行失败 
-
-    while(!feof(pipe)) 
+	while(!feof(pipe)) 
 	{
 		if(fgets(buffer, 128, pipe))
 		{                                     //将管道输出到result中 
-            strcat(result,buffer);
-        }
-    }
-    _pclose(pipe);                            //关闭管道 
-    return 1;                                 //返回1表示运行成功 
+			strcat(result,buffer);
+		}
+	}
+	_pclose(pipe);                            //关闭管道 
+	return 1;                                 //返回1表示运行成功 
 }
 
 int main()
@@ -54,8 +53,8 @@ int main()
 		if(Ping_OK == 1)
 		{
 			printf("\n");
-            printf("#################  交流电源 供电正常！ #################\n");
-            printf("\n");
+			printf("#################  交流电源 供电正常！ #################\n");
+			printf("\n");
 		}
 		else
 		{
@@ -86,12 +85,12 @@ int main()
 		}
 
 		for(i=20;i>0;i--)
-        {
-            printf("还有 %d 秒开始重测\n",i);
-            Sleep(1000); //延时 1000 ms
-        }
+		{
+			printf("还有 %d 秒开始重测\n",i);
+			Sleep(1000); //延时 1000 ms
+		}
 		printf("开始重测\n\n",i);
 	}
 	
-    system("pause");                          //暂停以查看结果 
+	system("pause");                          //暂停以查看结果 
 } 
