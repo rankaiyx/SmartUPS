@@ -1,52 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h> //winÍ·ÎÄ¼ş
-
+#include <windows.h> //winå¤´æ–‡ä»¶
 
 int execmd(char* cmd,char* result) 
 {
-    char buffer[128];                         //¶¨Òå»º³åÇø                        
-    FILE* pipe = _popen(cmd, "r");            //´ò¿ª¹ÜµÀ£¬²¢Ö´ĞĞÃüÁî 
+    char buffer[128];                         //å®šä¹‰ç¼“å†²åŒº                        
+    FILE* pipe = _popen(cmd, "r");            //æ‰“å¼€ç®¡é“ï¼Œå¹¶æ‰§è¡Œå‘½ä»¤ 
     if (!pipe)
-          return 0;                      //·µ»Ø0±íÊ¾ÔËĞĞÊ§°Ü 
+		return 0;                             //è¿”å›0è¡¨ç¤ºè¿è¡Œå¤±è´¥ 
 
     while(!feof(pipe)) 
 	{
 		if(fgets(buffer, 128, pipe))
-		{             //½«¹ÜµÀÊä³öµ½resultÖĞ 
+		{                                     //å°†ç®¡é“è¾“å‡ºåˆ°resultä¸­ 
             strcat(result,buffer);
         }
     }
-    _pclose(pipe);                            //¹Ø±Õ¹ÜµÀ 
-    return 1;                                 //·µ»Ø1±íÊ¾ÔËĞĞ³É¹¦ 
+    _pclose(pipe);                            //å…³é—­ç®¡é“ 
+    return 1;                                 //è¿”å›1è¡¨ç¤ºè¿è¡ŒæˆåŠŸ 
 }
 
 int main()
 {
-    char result[1024*4]="";                   //¶¨Òå´æ·Å½á¹ûµÄ×Ö·û´®Êı×é 
+	char result[1024*4]="";                   //å®šä¹‰å­˜æ”¾ç»“æœçš„å­—ç¬¦ä¸²æ•°ç»„ 
 	int i;
 	int Ping_OK;
 
-	printf("½»Á÷µçÔ´¹©µç¼ì²â³ÌĞò V1.0  \n×÷Õß:rankaiyx  QQ:858075120  ÈÕÆÚ:20180421\n\n");
-    printf("ËµÃ÷:\n¼´½«¿ªÊ¼ Ping Â·ÓÉÆ÷\nÄ¿±êÉè±¸IP: 192.168.0.1\n");
-	printf("PingÍ¨ Ôò±íÊ¾½»Á÷µç¹©µçÕı³££¬·ñÔòÎªÒì³£²¢Æô¶¯ĞİÃß\n\n");
+	printf("äº¤æµç”µæºä¾›ç”µæ£€æµ‹ç¨‹åº V1.0  \nä½œè€…:rankaiyx  QQ:858075120  æ—¥æœŸ:20180421\n\n");
+	printf("è¯´æ˜:\nå³å°†å¼€å§‹ Ping è·¯ç”±å™¨\nç›®æ ‡è®¾å¤‡IP: 192.168.0.1\n");
+	printf("Pingé€š åˆ™è¡¨ç¤ºäº¤æµç”µä¾›ç”µæ­£å¸¸ï¼Œå¦åˆ™ä¸ºå¼‚å¸¸å¹¶å¯åŠ¨ä¼‘çœ \n\n");
+	
 	for(i=10;i>0;i--)
-    {
-        printf("»¹ÓĞ %d Ãë¿ªÊ¼²âÊÔ\n",i);
-        Sleep(1000); //ÑÓÊ±1Ãë
-    }
-	printf("\n¿ªÊ¼²âÊÔ\n",i);
+	{
+		printf("è¿˜æœ‰ %d ç§’å¼€å§‹æµ‹è¯•\n",i);
+		Sleep(1000); //å»¶æ—¶ 1000 ms
+	}
+	printf("\nå¼€å§‹æµ‹è¯•\n",i);
 
 	while(1)
 	{
-		memset(result,0,1024);                //Çå¿Õ×Ö·û´®
-		execmd("ping 192.168.0.1",result);    //Ö´ĞĞ Ping ÃüÁî
+		memset(result,0,1024);                //æ¸…ç©ºå­—ç¬¦ä¸²
+		execmd("ping 192.168.0.1",result);    //æ‰§è¡Œ Ping å‘½ä»¤
 		//printf("%s", result);  
 
 		Ping_OK = 0;
 		for(i=0;i<1024;i++)
 		{
-			if(result[i]=='T' && result[i+1]=='T' && result[i+2]=='L')  //¼ì²éÆ½ Ping ½á¹ûÖĞÊÇ·ñ°üº¬ "TTL",Èç¹û°üº¬Ôò±íÊ¾ Ping Í¨
+			if(result[i]=='T' && result[i+1]=='T' && result[i+2]=='L')  //æ£€æŸ¥å¹³ Ping ç»“æœä¸­æ˜¯å¦åŒ…å« "TTL",å¦‚æœåŒ…å«åˆ™è¡¨ç¤º Ping é€š
 			{
 				Ping_OK = 1;
 			}
@@ -54,18 +54,18 @@ int main()
 		if(Ping_OK == 1)
 		{
 			printf("\n");
-            printf("#################  ½»Á÷µçÔ´ ¹©µçÕı³££¡ #################\n");
+            printf("#################  äº¤æµç”µæº ä¾›ç”µæ­£å¸¸ï¼ #################\n");
             printf("\n");
 		}
 		else
 		{
 			for(i=5;i>0;i--)
 			{
-				printf("½»Á÷µçÔ´ ¹©µçÒì³££¡ »¹ÓĞ %d Ãë½øĞĞÑéÖ¤£¡\n",i);
-				Sleep(1000); //ÑÓÊ±1Ãë
+				printf("äº¤æµç”µæº ä¾›ç”µå¼‚å¸¸ï¼ è¿˜æœ‰ %d ç§’è¿›è¡ŒéªŒè¯ï¼\n",i);
+				Sleep(1000); //å»¶æ—¶ 1000 ms
 			}
 
-			printf("\n¿ªÊ¼ÑéÖ¤\n\n",i);
+			printf("\nå¼€å§‹éªŒè¯\n\n",i);
 
 			memset(result,0,1024);
 			execmd("ping 192.168.0.1",result);
@@ -79,21 +79,19 @@ int main()
 			}
 			if(Ping_OK == 0)
 			{
-				printf("\n#############  ¹©µçÒì³£ Æô¶¯ĞİÃß£¡ ##############\n\n\n");
-				system("shutdown /h");                          //¿ªÊ¼ĞİÃß  (¸ÃÃüÁîµÄĞİÃß²ÎÊı Ö»´æÔÚ Windows Vista ÒÔÉÏÏµÍ³ÖĞ)
+				printf("\n#############  ä¾›ç”µå¼‚å¸¸ å¯åŠ¨ä¼‘çœ ï¼ ##############\n\n\n");
+				system("shutdown /h");                          //å¼€å§‹ä¼‘çœ   (è¯¥å‘½ä»¤çš„ä¼‘çœ å‚æ•° åªå­˜åœ¨ Windows Vista ä»¥ä¸Šç³»ç»Ÿä¸­)
 				break;
 			}
-
 		}
 
 		for(i=20;i>0;i--)
         {
-            printf("»¹ÓĞ %d Ãë¿ªÊ¼ÖØ²â\n",i);
-            Sleep(1000); //ÑÓÊ±1Ãë
+            printf("è¿˜æœ‰ %d ç§’å¼€å§‹é‡æµ‹\n",i);
+            Sleep(1000); //å»¶æ—¶ 1000 ms
         }
-		printf("¿ªÊ¼ÖØ²â\n\n",i);
+		printf("å¼€å§‹é‡æµ‹\n\n",i);
 	}
-
-    system("pause");                          //ÔİÍ£ÒÔ²é¿´½á¹û 
-
+	
+    system("pause");                          //æš‚åœä»¥æŸ¥çœ‹ç»“æœ 
 } 
